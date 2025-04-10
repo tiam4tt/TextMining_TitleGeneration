@@ -57,13 +57,15 @@ Both models are instruction fine-tuned on the same dataset with additional modif
 #### 4.2 Training parameters
 
 #### 4.3 Training time
+- FLAN-T5 base model: about 10 hours
+- BART base model: about 5 hours
 
 ### 5. Model evaluation
 
 | Model | ROUGE-1 | ROUGE-2 | ROUGE-L | ROUGE-Lsum | Precision | Recall | F1 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | **FLAN-T5 based model** | 0.6852 | 0.5385 | 0.6411 | 0.6411 | 0.9383 | 0.9222 | 0.93 |
-| **BART based model** |  |  |  |  |  |  |  |
+| **BART based model** | 0.7021 | 0.5614 | 0.6628 | 0.6628 | 0.9400 | 0.9265 | 0.9330 |
 
 ### 6. Deployment
 
