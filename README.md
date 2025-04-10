@@ -16,11 +16,11 @@ This project ultilitzes transformer-based seq2seq models from [Hugging Face](htt
 ---
 
 ### 1. Data collection
-The data source in this project is obtained from **Springer Journal**.
+The data source in this project is obtained from **Springer Nature**.
 All data are scrapped by team members using Python `requests` for fetching pages containing target data and `BeautifulSoup` to parse the HTML content, extracting 3 main fields:
 - URL (link to the article for validity checking).
-- Abstract (the summarization of that paper).
 - Title (the title of that paper).
+- Abstract (the summarization of that paper).
 
 ### 2. Data preprocessing
 - Originally the data has over 5M data points, in which we extracted publications that are related to the field machine learning by specifying keywords and looking for the presence of these keywords in the `abstract`.
