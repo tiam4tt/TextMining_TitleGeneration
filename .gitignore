@@ -5,7 +5,8 @@ app/*
 __pycache__/
 *.py[cod]
 *$py.class
-
+*.txt
+batches/
 # C extensions
 *.so
 
