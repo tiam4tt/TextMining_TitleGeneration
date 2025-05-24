@@ -1,12 +1,14 @@
+output/
 models/
+app/
+batches/
+data/
 *csv
-app/*
+*.txt
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
-*.txt
-batches/
 # C extensions
 *.so
 
