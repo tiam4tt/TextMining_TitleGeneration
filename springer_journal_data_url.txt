@@ -1,0 +1,10 @@
+[450 tokens of abstract length + >= 0.35 cosine similarity between title and abstract] : https://www.kaggle.com/datasets/tiamatt/springerjournal-450tk-035cosine
+[450 tokens of abstract length + >= 0.40 cosine similarity between title and abstract] : https://www.kaggle.com/datasets/tiamatt/springerjournal-450tk-0-4cosine
+[450 tokens of abstract length + >= 0.50 cosine similarity between title and abstract] : https://www.kaggle.com/datasets/tiamatt/springerjournal-450tk-0-5cosine
+[450 tokens of abstract length + >= 0.55 cosine similarity between title and abstract] : https://www.kaggle.com/datasets/tiamatt/springerjournal-450tk-0-55cosine
+[450 tokens of abstract length + >= 0.60 cosine similarity between title and abstract] : https://www.kaggle.com/datasets/tiamatt/springerjournal-450tk-0-6cosine
+[450 tokens of abstract length + >= 0.65 cosine similarity between title and abstract] : https://www.kaggle.com/datasets/tiamatt/springerjournal-450tk-0-65cosine
+[450 tokens of abstract length + >= 0.70 cosine similarity between title and abstract] : https://www.kaggle.com/datasets/tiamatt/springerjournal-450tk-0-7cosine
+[450 tokens of abstract length + >= 0.75 cosine similarity between title and abstract] : https://www.kaggle.com/datasets/tiamatt/springerjournal-450tk-0-75cosine
+[450 tokens of abstract length + >= 0.80 cosine similarity between title and abstract] : https://www.kaggle.com/datasets/tiamatt/springerjournal-450tk-0-8cosine
+[512 tokens of abstract length + >= 0.30 cosine similarity between title and abstract] : https://www.kaggle.com/datasets/tiamatt/springer-journal-final

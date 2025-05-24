@@ -1,7 +1,7 @@
 # Scientific Title Generation using transformer-based seq2seq models
 
 ## About the project
-This project ultilitzes transformer-based seq2seq models from [Hugging Face](https://huggingface.co/) to generate titles for a given abstract of a scientific publication, preferably in the field of machine learning. The project was assigned as a part of the course "Text Mining" at the University of Science - VNUHCM.
+This project ultilitzes transformer-based seq2seq models from [Hugging Face](https://huggingface.co/) to generate titles for a given abstract of a scientific publication, preferably in the field of machine learning. The project was assigned as a part of the course **Text Mining** at the University of Science - VNUHCM.
 
 ---
 
@@ -15,69 +15,63 @@ This project ultilitzes transformer-based seq2seq models from [Hugging Face](htt
 
 ---
 
-### 1. Data collection
-The data source in this project is obtained from **Springer Nature**.
-All data are scrapped by team members using Python `requests` for fetching pages containing target data and `BeautifulSoup` to parse the HTML content, extracting 3 main fields:
-- URL (link to the article for validity checking).
-- Title (the title of that paper).
-- Abstract (the summarization of that paper).
+### 1. Data Source
+The data source is obtained from **Springer Nature** using `requests`and `BeautifulSoup`.
 
-### 2. Data preprocessing
-- Originally the data has over 5M data points, in which we extracted publications that are related to the field machine learning by specifying keywords and looking for the presence of these keywords in the `abstract`.
-- We came down to ~91k data points after filtering. However during the process of Exploratory Data Analysis (EDA), we found out that there were few data points whose number of tokens of `abstract` exceeds 512, which is the maximum length that most of the transfomer-based models can handle. Therefore, we further filtered the data to only include data points whose tokens of `abstract` is in the range of 128 to 512 and number of tokens in `title` is between 8 and 32.
-- Further preprocessing of the vocabulary (unique words and their count of occurence) reveals that using traditional scikit-learn's `train_test_split()` method does not evenly distribute the data, due to the fact that there are too many words from `test` set and `validation` set that are not present in the `train` set. This will cause the model to perform badly. Therefore, we decided to use **stratified sampling** to evenly distributing the data. 
-    - The idea of **stratified sampling** is to divide data into subgroups based on their keywords (cnn, rnn, deep learning, etc.) and then sample from each subgroup to form the `train`, `validation`, and `test` set.
-### 3. Model selection
-For learning purposes, we tried training the data with 2 traditional seq2seq models:
-- Long-Short Term Memory (LSTM) model.
-- Gated Recurrent Unit (GRU) model.
+Access all links to the data [here](./springer_journal_data_url.txt)
 
-Of course, none of which gave a satisfactory result. These models are just purely for studying purposes.
-We then moved on to using transformer-based models from Hugging Face. Initially we experimented on various models and eventually narrowed down to 2 models:
-- `google/flan-t5-base`
-- `facebook/bart-base`
+### 2. Model
 
-Why we chose these 2 models:
-- FLAN-T5 is a model that was further fine-tuned based on T5, for the same number of parameters (248M). It is trained on a large-scale mixture of tasks, including summarization, translation, and question-answering.
-- BART is a model that was trained on a large corpus of text and is known for its ability to generate high-quality text. It has been shown to perform well on various natural language processing tasks, including summarization and translation.
+- `google/flan-t5-base`: created for performing various tasks, good for instruction fine-tuning.
+- `facebook/bart-base`: made for semantic comprehension, optimized for text generation.
 
-*Both models are seq2seq models, which means they are designed to take an input sequence (in this case, the abstract) and generate an output sequence (the title).*
-### 4. Model training
-
-Training is carried out on **Kaggle** with the help of their **Tesla P100-PCIE-16GB** GPU.
-
-Links to the models:
+Links to the complete models:
 - [tiam4tt/flan-t5-titlegen-springer](https://huggingface.co/tiam4tt/flan-t5-titlegen-springer)
 - [HTThuanHcmus/bart-finetune-scientific-improve](https://huggingface.co/HTThuanHcmus/bart-finetune-scientific-improve)
 
-#### 4.1 Training method
+### 4. Model training
 
-Both models are instruction fine-tuned on the same dataset with additional modifications to how each model handle the input and output sequences to ensure optimization.
+Training is carried out on **Kaggle** with the use of **Tesla P100-PCIE-16GB** GPU.
 
-#### 4.2 Training parameters
-
-#### 4.3 Training time
-- FLAN-T5 base model: about 10 hours
-- BART base model: about 5 hours
-
-### 5. Model evaluation
-
-| Model | ROUGE-1 | ROUGE-2 | ROUGE-L | ROUGE-Lsum | Precision | Recall | F1 |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| **FLAN-T5 based model** | 0.6852 | 0.5385 | 0.6411 | 0.6411 | 0.9383 | 0.9222 | 0.93 |
-| **BART based model** | 0.7021 | 0.5614 | 0.6628 | 0.6628 | 0.9400 | 0.9265 | 0.9330 |
-
-### 6. Deployment
-
-Hugging Face provides a hosting service with **Hugging Face Spaces** to create a simple interactive web application for our model.
-The web application is built using **Streamlit**. Users can:
-- Input their **abstract** to generate a **title** for their publication.
-- Register/Login to the web app to save and view interaction history (input abstract, output title, time of interaction and model used).
+Methodology:
+- **Instruction fine-tune:** concatenate the abstract and a prompt to form a single input.
+- **Keyword aware instruction fine-tune:** concatenate the abstract, a prompt, and keywords to form a single input.
 
 
+### 4. Deployment
 
-Our web application can be accessible [here](https://huggingface.co/spaces/tiam4tt/title-generator-for-Machine-Learning-publications).
+Hosted on [Hugging Face Spaces](https://huggingface.co/spaces/tiam4tt/title-generator-for-Machine-Learning-publications).
 
-### 7. Future work
-- [ ] Allow the view of evaluation results on generated titles.
-- [ ] Consistent user session.
+### 5. Running locally
+
+Navigate to project directory
+```bash
+cd src/
+```
+
+Install required packages
+```bash
+pip install -r requirements.txt
+```
+
+Run the app
+```bash
+streamlit run app.py
+```
+
+### 6. Using the models in your own code
+Here's and example:
+```python
+from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
+
+model = AutoModelForSeq2SeqLM.from_pretrained("tiam4tt/flan-t5-titlegen-springer")
+tokenizer = AutoTokenizer.from_pretrained("tiam4tt/flan-t5-titlegen-springer")
+
+abstract = "Transfer learning has become a crucial technique in deep learning, enabling models to leverage knowledge from pre-trained networks for improved performance on new tasks. In this study, we propose an optimized fine-tuning strategy for convolutional neural networks (CNNs), reducing training time while maintaining high accuracy. Experiments on CIFAR-10 show a 15% improvement in efficiency compared to standard fine-tuning methods, demonstrating the effectiveness of our approach."
+
+inputs = tokenizer(abstract, return_tensors="pt", padding=True, truncation=True)
+outputs = model.generate(**inputs, max_new_tokens=32)
+
+title = tokenizer.decode(outputs[0], skip_special_tokens=True)
+print(title)
+```
