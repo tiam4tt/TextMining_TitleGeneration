@@ -15,6 +15,46 @@ This project ultilitzes transformer-based seq2seq models from [Hugging Face](htt
 
 ---
 
+
+### Project Structure
+```
+.
+├── baseline
+│   ├── bart-base.ipynb
+│   ├── flan-t5-base.ipynb
+│   ├── gpt2.ipynb
+│   └── pegasus-xsum.ipynb
+├── datasize_score.ipynb
+├── improved
+│   ├── bart
+│   │   ├── bert-large-bart-large.ipynb
+│   │   ├── flant5-large-bart-small.ipynb
+│   │   ├── flant5-small-bart-small.ipynb
+│   │   ├── keybart-scibert-large-bart-small.ipynb
+│   │   ├── keybart-scibert-small-bart-small.ipynb
+│   │   ├── keyt5-scibert-large-bart-small.ipynb
+│   │   ├── keyt5-scibert-small-bart-small.ipynb
+│   │   ├── roberta-large-bart-small.ipynb
+│   │   ├── roberta-small-bart-small.ipynb
+│   │   ├── scibert-large-bart-large.ipynb
+│   │   ├── scibert-large-bart-small.ipynb
+│   │   └── scibert-small-bart-small.ipynb
+│   └── flan-t5
+│       ├── flant5-large-flant5-small.ipynb
+│       ├── flant5-small-flant5-small.ipynb
+│       ├── roberta-large-flant5-small.ipynb
+│       ├── roberta-small-flant5-small.ipynb
+│       ├── scibert-large-flant5-small.ipynb
+│       └── scibert-small-flant5-small.ipynb
+└── RNN
+    ├── gru-embedding.ipynb
+    ├── gru-glove.ipynb
+    ├── lstm-embedding.ipynb
+    └── lstm-glove.ipynb
+
+6 directories, 27 files
+```
+
 ### 1. Data Source
 The data source is obtained from **Springer Nature** using `requests`and `BeautifulSoup`.
 
