@@ -4,12 +4,13 @@ import pandas as pd
 # predictions = pd.read_csv("./output/gpt-4o-mini-output.csv").reset_index(drop=True)[
 #     "title"
 # ]
+
 predictions = pd.read_csv("./output/gemini-2.0-flash-001-output.csv").reset_index(
     drop=True
 )["title"]
 
 
-references = pd.read_csv("./data/test.csv").reset_index(drop=True)["abstract"]
+references = pd.read_csv("./test.csv").reset_index(drop=True)["abstract"]
 
 
 rouge = evaluate.load("rouge")
